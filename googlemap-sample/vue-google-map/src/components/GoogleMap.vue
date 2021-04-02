@@ -10,18 +10,24 @@ export default {
   data(){
     return {
       map: '',
+      myLatLng:{lat: -34.397, lng: 150.644},
+      key: process.env.VUE_APP_API_MAP,
     }
   },
   mounted(){
-    let timer = setInterval(() => {
-      if(window.google){
-        clearInterval(timer);
-        this.map = new window.google.maps.Map(this.$refs.map, {
-          center: {lat: -34.397, lng: 150.644},
-          zoom:8
-        });
-      }
-    },500)
+    console.log(this.key);
+    let script = document.createElement('script');
+    script.src = process.env.VUE_APP_API_MAP;
+    script.async = true;
+    document.head.appendChild(script);
+
+    window.initMap = () => {
+      this.map = new window.google.maps.Map(this.$refs.map,{
+        center: this.myLatLng,
+        zoom: 8
+      });
+      new window.google.maps.Marker({position:this.myLatLng,map:this.map})
+    }
   }
 }
 </script>
