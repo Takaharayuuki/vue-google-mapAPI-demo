@@ -7,11 +7,19 @@
 
 <script>
 export default {
+  props: {
+    myLatLng: {
+      type: Object,
+      required:true,
+     },
+     zoom: {
+       type:Number,
+       required: true
+     }
+  },
   data(){
     return {
       map: '',
-      myLatLng:{lat: -34.397, lng: 150.644},
-      key: process.env.VUE_APP_API_MAP,
     }
   },
   mounted(){
@@ -24,7 +32,7 @@ export default {
     window.initMap = () => {
       this.map = new window.google.maps.Map(this.$refs.map,{
         center: this.myLatLng,
-        zoom: 8
+        zoom: this.zoom
       });
       new window.google.maps.Marker({position:this.myLatLng,map:this.map})
     }

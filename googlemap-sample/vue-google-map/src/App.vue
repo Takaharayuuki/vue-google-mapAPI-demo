@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <google-map />
+    <google-map :myLatLng="{lat: -25.344, lng: 131.036}" :zoom="4" />
   </div>
 </template>
 
